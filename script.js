@@ -4,16 +4,6 @@ let allEpisodes = []; // global store to keep original data
 function setup() {
   allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
-
-  const searchInput = document.getElementById("search-input");
-  searchInput.addEventListener("input", (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const filteredEpisodes = allEpisodes.filter((episode) => {
-      return episode.name.toLowerCase().includes(searchTerm) || 
-             episode.summary.toLowerCase().includes(searchTerm);
-    });
-    makePageForEpisodes(filteredEpisodes);
-  });
   setupSearch();
   setupSelector();
 }
@@ -73,7 +63,7 @@ function setupSearch() {
 
 function setupSelector() {
   const select = document.getElementById("episode-select");
-  
+
   allEpisodes.forEach((episode) => {
     const option = document.createElement("option");
     option.value = episode.id;

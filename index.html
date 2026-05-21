@@ -9,10 +9,13 @@
   </head>
 
   <body>
-    <section class="search-container">
-    <input type="text" id="search-input" placeholder="Search episodes..." />
-    <span id="results-count"></span>
-    </section>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search episodes..." />
+      <select id="episode-select">
+        <option value="">Select an episode...</option>
+      </select>
+      <span id="episode-count"></span>
+    </div>
 
     <div id="root"></div>
 
