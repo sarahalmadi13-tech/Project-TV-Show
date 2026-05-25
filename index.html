@@ -1,33 +1,39 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | Sarah (sarahalmadi13-tech)</title>
-    <link href="style.css" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  </head>
 
-  <body>
-    <div class="controls">
-      <input type="text" id="search" placeholder="Search episodes..." />
-      <select id="episode-select">
-        <option value="">Select an episode...</option>
-      </select>
-      <span id="episode-count"></span>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TV Show Project | Sarah (sarahalmadi13-tech)</title>
+  <link href="style.css" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+</head>
 
-    <div id="root"></div>
+<body>
+  <div class="controls">
+    <select id="show-select">
+      <option value="">Choose a show...</option>
+    </select>
 
-    <p>
-      Data originally from
-      <a href="https://www.tvmaze.com" target="_blank">TVMaze.com</a>
-    </p>
+    <input type="text" id="search" placeholder="Search episodes..." />
+    <select id="episode-select">
+      <option value="">Select an episode...</option>
+    </select>
+    <span id="episode-count"></span>
+  </div>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+  <div id="root"></div>
 
-    <!-- Loads YOUR javascript code -->
-    <script src="script.js"></script>
-  </body>
+  <p>
+    Data originally from
+    <a href="https://www.tvmaze.com" target="_blank">TVMaze.com</a>
+  </p>
+
+  <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
+  <script src="episodes.js"></script>
+
+  <!-- Loads YOUR javascript code -->
+  <script src="script.js"></script>
+</body>
+
 </html>
