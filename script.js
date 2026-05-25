@@ -1,4 +1,22 @@
 //You can edit ALL of the code here
+
+let allShows = [];
+
+async function loadAllShows() {
+  const response = await fetch("https://api.tvmaze.com/shows");
+  allShows = await response.json();
+
+  allShows.sort((a, b) => a.name.localeCompare(b.name));
+
+  const select = document.getElementById("show-select");
+  allShows.forEach((show) => {
+    const option = document.createElement("option");
+    option.value = show.id;
+    option.textContent = show.name;
+    select.appendChild(option);
+  });
+}
+
 let allEpisodes = []; // global store to keep original data
 
 function setup() {
@@ -98,4 +116,3 @@ function setupSelector() {
 
 //run setup when page loads, this will fetch the episode data and render the UI
 window.onload = setup;
-// Temporary change so I can open a PR for my partner
