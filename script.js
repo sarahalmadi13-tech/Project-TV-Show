@@ -23,6 +23,7 @@ let allEpisodes = []; // global store to keep original data
 
 function setup() {
   loadAllShows();
+  setupSearch();
   setupShowSelector();
 }
 
@@ -120,6 +121,7 @@ function setupShowSelector() {
     // show episodes
     makePageForEpisodes(allEpisodes);
     setupSelector();
+    setupSearch();
   });
 }
 
