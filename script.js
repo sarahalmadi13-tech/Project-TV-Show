@@ -1,27 +1,30 @@
 //You can edit ALL of the code here
+
+let allShows = [];
+
+async function loadAllShows() {
+  const response = await fetch("https://api.tvmaze.com/shows");
+  allShows = await response.json();
+
+  // sort by name A-Z (case-insensitive)
+  allShows.sort((a, b) => a.name.localeCompare(b.name));
+
+  // fill drop down list
+  const select = document.getElementById("show-select");
+  allShows.forEach((show) => {
+    const option = document.createElement("option");
+    option.value = show.id;
+    option.textContent = show.name;
+    select.appendChild(option);
+  });
+}
+
 let allEpisodes = []; // global store to keep original data
 
 function setup() {
-  const root = document.getElementById("root");
-  root.textContent = "Loading...";
-
-  fetch("https://api.tvmaze.com/shows/82/episodes")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((episodes) => {
-      allEpisodes = episodes;
-      makePageForEpisodes(allEpisodes);
-      setupSearch();
-      setupSelector();
-    })
-    .catch((error) => {
-      console.error("Error fetching episodes:", error);
-      root.innerHTML = "<p>Error loading episodes. Please try again later.</p>";
-    });
+  loadAllShows();
+  setupSearch();
+  setupShowSelector();
 }
 
 //The Main rendering function. Once you have the list of episodes,
@@ -93,6 +96,32 @@ function setupSelector() {
       const element = document.getElementById(`ep-${selectedId}`);
       element.scrollIntoView({ behavior: "smooth" });
     }
+  });
+}
+
+function setupShowSelector() {
+  const showSelect = document.getElementById("show-select");
+
+  showSelect.addEventListener('change', async (e) => {
+    const showId = e.target.value;
+
+    if (!showId) return; // in case of selection empty option do nothing
+
+    // show "Loading..."
+    document.getElementById('root').innerHTML = 'Loading...';
+
+    // loading episodes for selected show
+    const response = await fetch(`https://api.tvmaze.com/shows/${showId}/episodes`);
+    allEpisodes = await response.json();
+
+    // clean search & selector
+    document.getElementById('search').value = '';
+    document.getElementById('episode-select').innerHTML = '<option value="">Select an episode...</option>';
+
+    // show episodes
+    makePageForEpisodes(allEpisodes);
+    setupSelector();
+    setupSearch();
   });
 }
 
